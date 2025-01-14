@@ -1,104 +1,184 @@
-# **Website 2 APK Builder 5.3 Pro**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Champion Trophy 2025 Live TV</title>
+    <style>
+        /* Basic Reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+            background-color: #000;
+            color: #fff;
+        }
 
-> Convert your Website or HTML5 app to a native Android App.
-> 
-> Supports html5, html, php, htm, js, css.
-> 
-> Build app from any live website or from local html folder.
+        /* Fullscreen Container */
+        .fullscreen-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+        }
 
-**What's new in v5.3**
-- Push Notification Permission
-- Added Android 13 Special Permission
-- Bug Fixes**
+        /* Banner Ad */
+        .banner-ad {
+            width: 100%;
+            height: 50px;
+            background-color: #333;
+            text-align: center;
+            line-height: 50px;
+            color: white;
+            font-size: 14px;
+        }
 
- **Highlights:**
-- Android App Bundle (.aab) Support
-- Android TV Support
-- Support for 100 MB+ APKs
-- Firebase In-App Messaging
-- Blob Download Support
-- Multiple Image Upload Support
-- JS API to get device API Level
-- Unicode character support for Nav Drawer
-- Deep-linking
-- Material Design
-- Change Material Color Scheme
-- Pull-to-Refresh
-- Navigation Drawer Designer
-- Live Toolbar Title
-- Material Toolbar
-- Wix Support (Fixed Layout Issue)
-- Better handling for SSL related errors
-- Updated Firebase and AdMob library versions
-- JS API to prevent device from sleeping
-- Fix Audio Play Bug
-- Overview mode enabled along with Desktop mode.
-- Push notifications automatically expandable when description is longer
-- Cookies now work with offline files too
-- JS API to show/hide AdMob banner on selected pages
-- .Webapp project now saves permissions, push config and progress wheel also.
-- Option to remove JavaScript APIs (In response to JavaScript Interface Injection Vulnerability)
-- Desktop Mode
-- HTTPs Only Mode (In response to JavaScript Interface Injection Vulnerability & Better Security)
-- Debug Mode can now display SSL related errors on your screen)
-- Keep Screen On while playing full screen videos
-- Hide WebView User Agent (Allows login with Google and Many more).
-- Added option to select if you want to overlap new notification to existing or show as new.
-- Added "isBroadcastEnabled" JS API Function
-- Audio recording now working.  
-- GDPR Compliant AdMob Functions
-- Allow or Prevent Screenshot
-- Push Notifications API Access
-- Adjust Screen Layout while Typing
-- Custom Keystore
-- Download via Download Manager
-- Push Notifications
-- Persistent Cookies
-- App Orientation
-- New JavaScript APIs 
-- jQuery, Ionic & jQueryMobile support for Offline HTML Apps.
-- App Share Button (Also avaibale with Javascript)
-- FullScreen Mode
-- Display Toast & Dialog via JavaScript
-- Gesture Zoom Support
-- JavaScript APIs to perform In-App Activities
-- HTML5 Vibration API Support
-- Skype, Whatsapp, SMS, Intent links Support
-- Externl Links Open Outside (Optional Supprted)
-- Confirm on Exit (Optional to Enable)
-- Build Android Apps easily from your HTML5 or Web Content
-- Create Apps in seconds for your Live Website
-- AdMob Banner & Interstitial Ads
-- Custom Splash screen
-- Custom Package Name
-- Custom Android Permissions
-- Custom Error Pages
-- Google Play Ready Android App
-- Login Session Keeping
-- Configurable Caching Options
-- Offine HTML5 Video Support
-- File Upload Support
-- Camera Upload Support
-- Save Project as .webapp file
-- Camcorder Video Recording Upload
-- Location issue fixed
-- Set App Orientation
-- Zoom Buttons Option
-- About Dialog
-- Custom Progress Wheel
-- Set Splash Duration
-- Completely Ad-Free
-- No Back-Links
-- User Friendly
-- Best App Results for Responsive Sites
+        /* Reward Popup */
+        .reward-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: none;
+            z-index: 1000;
+        }
 
-## **[Download Now!](https://websitetoapk.com/download.html)**
+        /* Match Player Fullscreen */
+        .fullscreen-match {
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: none;
+        }
 
-![screenshot1](http://websitetoapk.com/images/screenshots/v5.3_1.png)
+        /* Loading Spinner */
+        .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+        }
 
-**For Updates & More Releases:**
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 
-Follow Us [@GoyalSoftech](https://github.com/goyalsoftech/)
-(http://www.goyalsoftech.com/)
+    <!-- Unity Ads SDK -->
+    <script type="text/javascript" src="https://ssl.gstatic.com/doubleclick/novelty/adsdk/unityads.js"></script>
+</head>
+<body>
 
-## **[Download Now!](https://websitetoapk.com/download.html)**
+    <!-- Fullscreen Match Player -->
+    <div class="fullscreen-container" id="match-container">
+        <div class="spinner" id="loading-spinner"></div>
+        <div class="fullscreen-match" id="match-player">
+            <iframe src="https://crichd.com.co/crichd13012025" frameborder="0" width="100%" height="100%" onload="matchLoaded()"></iframe>
+        </div>
+    </div>
+
+    <!-- Banner Ad -->
+    <div class="banner-ad" id="unity-banner">
+        <p>Banner Ad Here (Unity Ads will show here)</p>
+    </div>
+
+    <!-- Reward Ad Popup -->
+    <div class="reward-popup" id="reward-popup">
+        <p>Watch an ad to earn rewards!</p>
+        <button onclick="closeRewardPopup()">Close</button>
+    </div>
+
+    <script>
+        // Unity Ads Initialization
+        const unityAdId = "5774285"; // Your Unity Ad ID
+        let isRewardedAdReady = false;
+
+        // Initialize Unity Ads
+        function initializeUnityAds() {
+            unityads.initialize(unityAdId, function(status) {
+                if (status === "READY") {
+                    console.log("Unity Ads Initialized Successfully!");
+                } else {
+                    console.log("Unity Ads Failed to Initialize.");
+                }
+            });
+        }
+
+        // Show Rewarded Ad
+        function showRewardAd() {
+            if (isRewardedAdReady) {
+                unityads.showRewardedVideo("rewardedVideo", function(adResult) {
+                    if (adResult === "COMPLETED") {
+                        alert("You earned rewards for watching the ad!");
+                    } else {
+                        alert("You skipped the ad.");
+                    }
+                });
+            } else {
+                alert("Rewarded ad not ready!");
+            }
+        }
+
+        // Show Banner Ad
+        function showBannerAd() {
+            unityads.showBanner("banner", {position: "top"});
+        }
+
+        // Callback when rewarded ad is ready
+        unityads.on("rewardedVideoAdReady", function() {
+            isRewardedAdReady = true;
+            console.log("Rewarded Video Ad is ready!");
+        });
+
+        // Match loaded function
+        function matchLoaded() {
+            document.getElementById('loading-spinner').style.display = 'none';
+            document.getElementById('match-player').style.display = 'block';
+        }
+
+        // Open match in fullscreen mode
+        function openMatchFullScreen() {
+            const matchPlayer = document.getElementById('match-player');
+            matchPlayer.style.display = 'block'; // Show fullscreen match
+        }
+
+        // Show Reward Ad Popup
+        function showRewardPopup() {
+            const rewardPopup = document.getElementById('reward-popup');
+            rewardPopup.style.display = 'block';
+        }
+
+        // Close Reward Ad Popup
+        function closeRewardPopup() {
+            const rewardPopup = document.getElementById('reward-popup');
+            rewardPopup.style.display = 'none';
+            showRewardAd(); // Trigger the reward ad when popup is closed
+        }
+
+        // Trigger Reward Popup after 3 seconds (adjust as needed)
+        setTimeout(() => {
+            showRewardPopup();
+        }, 3000);
+
+        // Initialize Unity Ads when the page is loaded
+        window.onload = function() {
+            initializeUnityAds();
+            showBannerAd();
+            openMatchFullScreen();
+        };
+    </script>
+
+</body>
+</html>
